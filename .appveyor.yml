@@ -22,6 +22,6 @@ on_success:
  - set APP_FOLDER=%APPVEYOR_BUILD_FOLDER%\ci-sharp-test\Build\%CONFIGURATION%
  - if     "%APPVEYOR_REPO_TAG_NAME%" == "" set APP_ZIP=%APPVEYOR_PROJECT_NAME%.zip
  - if not "%APPVEYOR_REPO_TAG_NAME%" == "" set APP_ZIP=%APPVEYOR_PROJECT_NAME%-%APPVEYOR_REPO_TAG_NAME%.zip
- - 7z a %APP_ZIP% %APP_FOLDER%\ci-sharp-test.exe*
- - if "%CONFIGURATION%" == "Debug" 7z u %APP_ZIP% %APP_FOLDER%\*.pdb
+ - 7z a %APP_ZIP% %APP_FOLDER%\ci-sharp-test.exe* %APP_FOLDER%\*.dll
+ - if "%CONFIGURATION%" == "Debug" 7z u %APP_ZIP% %APP_FOLDER%\*.pdb %APP_FOLDER%\*.xml
  - appveyor PushArtifact %APP_ZIP%
