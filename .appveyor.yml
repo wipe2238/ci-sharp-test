@@ -14,7 +14,7 @@ clone_depth: 50
 
 install:
  - set
- - cd $(APPVEYOR_BUILD_FOLDER)
+ - cd %APPVEYOR_BUILD_FOLDER%
  - git submodule update --init --recursive
 
 build:
