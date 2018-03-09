@@ -1,0 +1,7 @@
+.nuget
+.svn
+.vs
+
+Build
+
+*.user

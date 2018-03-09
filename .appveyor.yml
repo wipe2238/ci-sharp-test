@@ -1,0 +1,25 @@
+version: "{build}"
+
+image:
+- Visual Studio 2017
+- Visual Studio 2015
+
+configuration:
+ - Debug
+ - Release
+
+platform: Any CPU
+
+clone_depth: 50
+
+install:
+ - set
+ - cd $(APPVEYOR_BUILD_FOLDER)
+ - git submodule update --init --recursive
+
+build:
+ project: c:\projects\ci-sharp-test\ci-sharp-test.sln
+ parallel: true
+
+before_deploy:
+ - set
