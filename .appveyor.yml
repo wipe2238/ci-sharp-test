@@ -11,7 +11,6 @@ platform: Any CPU
 clone_depth: 50
 
 install:
- - set
  - cd %APPVEYOR_BUILD_FOLDER%
  - git submodule update --init --recursive
 
@@ -20,12 +19,9 @@ build:
  parallel: true
 
 on_success:
- - set APP_ZIP_TAG=%APPVEYOR_REPO_TAG_NAME%
- - if "%APPVEYOR_REPO_TAG_NAME%" == "" set APP_ZIP_TAG=%APPVEYOR_REPO_BRANCH%-%CONFIGURATION%
- - set APP_ZIP=%APPVEYOR_PROJECT_NAME%-%APP_ZIP_TAG%.zip
- - 7z a %APP_ZIP% %APPVEYOR_BUILD_FOLDER%\ci-sharp-test\Build\%CONFIGURATION%\ci-sharp-test.exe*
- - if "%CONFIGURATION%" == "Debug" 7z u %APP_ZIP% %APPVEYOR_BUILD_FOLDER%\ci-sharp-test\Build\%CONFIGURATION%\*.pdb
+ - set APP_FOLDER=%APPVEYOR_BUILD_FOLDER%\ci-sharp-test\Build\%CONFIGURATION%
+ - if     "%APPVEYOR_REPO_TAG_NAME%" == "" set APP_ZIP=%APPVEYOR_PROJECT_NAME%.zip
+ - if not "%APPVEYOR_REPO_TAG_NAME%" == "" set APP_ZIP=%APPVEYOR_PROJECT_NAME%-%APPVEYOR_REPO_TAG_NAME%.zip
+ - 7z a %APP_ZIP% %APP_FOLDER%\ci-sharp-test.exe*
+ - if "%CONFIGURATION%" == "Debug" 7z u %APP_ZIP% %APP_FOLDER%\*.pdb
  - appveyor PushArtifact %APP_ZIP%
- - dir
- - cd \
- - dir
