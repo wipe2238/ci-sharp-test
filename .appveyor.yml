@@ -19,6 +19,8 @@ build:
  project: c:\projects\ci-sharp-test\ci-sharp-test.sln
  parallel: true
 
+# https://ci.appveyor.com/api/projects/wipe2238/ci-sharp-test/artifacts/ci-sharp-test.zip?branch=master&job=Configuration%3A+Release
+# https://www.appveyor.com/docs/packaging-artifacts/#permalink-to-the-last-successful-build-artifact
 on_success:
  - set APP_FOLDER=%APPVEYOR_BUILD_FOLDER%\ci-sharp-test\Build\%CONFIGURATION%
  - if     "%APPVEYOR_REPO_TAG_NAME%" == "" set APP_ZIP=%APPVEYOR_PROJECT_NAME%.zip
